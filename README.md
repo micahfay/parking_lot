@@ -8,3 +8,5 @@ You may have to `ctrl+c`, `docker compose down`, and `docker compose up` to get 
 
 Once it's running you can access the api docs and localhost:8000/api/docs/ on your machine.
 
+There are a limited number of tests in the repo only for the most essential functions. you can run them with the command:
+`docker compose run --rm web python manage.py test`
