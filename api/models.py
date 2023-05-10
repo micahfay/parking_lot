@@ -1,6 +1,3 @@
-from datetime import datetime
-
-import pytz
 from django.db import models
 
 class ParkingLot(models.Model):
@@ -19,8 +16,7 @@ class VehicleTypes(models.IntegerChoices):
 class Vehicle(models.Model):
     type = models.IntegerField(choices=VehicleTypes.choices)
     license_plate = models.CharField(max_length=10, unique=True)
-    parked_at = models.DateTimeField(
-        default=lambda: datetime.now(tz=pytz.UTC))
+    parked_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f'{VehicleTypes(self.type).name} - {self.license_plate}'
