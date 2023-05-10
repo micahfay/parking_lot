@@ -91,6 +91,12 @@ class ParkVehicleSerializer(serializers.Serializer):
         max_length=10, help_text='Vehicles license plate number')
 
     def validate(self, data):
+        if Vehicle.objects.filter(
+                license_plate=data['license_plate']).exists():
+            raise ValidationError('Vehicle with that license plate already '
+                                  'exists. you need to unpark it before you '
+                                  'can park irt somewhere else.')
+
         lot = generics.get_object_or_404(
             ParkingLot, name=data['lot_name']
         )
